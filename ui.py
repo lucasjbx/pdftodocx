@@ -1,3 +1,5 @@
+# Import the required modules
+from pdf2docx import Converter
 from tkinter import *
 from tkinter import filedialog
 
@@ -19,8 +21,14 @@ label_dest_folder.grid(column=1, row=2)
 
 
 # Buttons
+
+def convert():
+    # Using the built-in function, convert the PDF file to a document file by saving it in a variable.
+    cv = Converter(label["text"])
+    cv.convert(label_dest_folder["text"]+"/pdf.docx")
+
 def select_file():
-    pdf_file = filedialog.askopenfilename()
+    pdf_file = filedialog.askopenfilename(filetypes=[('PDF Files', '*.pdf')])
     label.config(text=pdf_file)
 
 def select_folder():
@@ -28,7 +36,7 @@ def select_folder():
     label_dest_folder.config(text=dest_folder)
     print(label_dest_folder["text"])
     if label["text"] != "Select PDF file":
-        button3 = Button(text="Convert")
+        button3 = Button(text="Convert", command=convert)
         button3.grid(row=5, column=1)
 
 
