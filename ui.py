@@ -25,7 +25,10 @@ label_dest_folder.grid(column=1, row=2)
 def convert():
     # Using the built-in function, convert the PDF file to a document file by saving it in a variable.
     cv = Converter(label["text"])
-    cv.convert(label_dest_folder["text"]+"/pdf.docx")
+    file_name= label["text"].split('/')[-1].split('.')[0]
+    dest = label_dest_folder["text"]+"/"+file_name+".docx"
+    print(dest)
+    cv.convert(dest)
 
 def select_file():
     pdf_file = filedialog.askopenfilename(filetypes=[('PDF Files', '*.pdf')])
@@ -43,7 +46,7 @@ def select_folder():
 # calls action() when pressed
 button = Button(text="Select file", command=select_file)
 
-button.grid(row=1, column=1)
+button.grid(row=1, column=1)   
 
 
 button2 = Button(text="Select Dest Folder", command=select_folder)
